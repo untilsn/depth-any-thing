@@ -1,3 +1,97 @@
+# Depth-Anything-V2
+
+Dự án Depth-Anything-V2 là một công cụ để tạo bản đồ độ sâu từ ảnh sử dụng mô hình ViT-L/14.
+
+## Cài đặt môi trường
+
+1. Tạo môi trường ảo Python:
+```bash
+python -m venv venv
+```
+
+2. Kích hoạt môi trường ảo:
+- Windows:
+```bash
+venv\Scripts\activate
+```
+- Linux/Mac:
+```bash
+source venv/bin/activate
+```
+
+3. Cài đặt các thư viện cần thiết:
+```bash
+pip install -r requirements.txt
+```
+
+## Tải các file cần thiết
+
+1. Tải model weights:
+- Truy cập [Hugging Face](https://huggingface.co/spaces/LiheYoung/Depth-Anything)
+- Tải file `depth_anything_vitl14.pth` và đặt vào thư mục gốc của dự án
+
+2. Tải các file cấu hình:
+- Đảm bảo các file cấu hình trong thư mục `configs/` đã được tải đầy đủ
+- Các file cấu hình cần thiết bao gồm:
+  - `configs/depth_anything_vitl14.yaml`
+  - `configs/depth_anything_vitl14_weights.yaml`
+
+## Cấu hình file run.py
+
+File `run.py` có các tham số cấu hình sau:
+
+```python
+parser.add_argument('--input_path', type=str, default='input.jpg', help='Đường dẫn đến ảnh đầu vào')
+parser.add_argument('--output_path', type=str, default='output.png', help='Đường dẫn lưu ảnh đầu ra')
+parser.add_argument('--model_path', type=str, default='depth_anything_vitl14.pth', help='Đường dẫn đến file model weights')
+parser.add_argument('--device', type=str, default='cuda', help='Thiết bị chạy (cuda/cpu)')
+parser.add_argument('--config_path', type=str, default='configs/depth_anything_vitl14.yaml', help='Đường dẫn đến file cấu hình')
+```
+
+### Ví dụ sử dụng:
+
+1. Chạy với cấu hình mặc định:
+```bash
+python run.py
+```
+
+2. Chạy với ảnh tùy chỉnh:
+```bash
+python run.py --input_path my_image.jpg --output_path my_depth.png
+```
+
+3. Chạy trên CPU:
+```bash
+python run.py --device cpu
+```
+
+## Cấu trúc thư mục
+
+```
+.
+├── configs/                 # Thư mục chứa các file cấu hình
+├── depth_anything/         # Thư mục chứa mã nguồn chính
+├── input.jpg              # Ảnh đầu vào mặc định
+├── output.png             # Ảnh đầu ra mặc định
+├── depth_anything_vitl14.pth  # File model weights
+├── requirements.txt       # Danh sách các thư viện cần thiết
+└── run.py                # File chạy chính
+```
+
+## Lưu ý
+
+1. Đảm bảo bạn có đủ dung lượng ổ đĩa để tải và lưu model weights
+2. Nếu sử dụng GPU, cần cài đặt CUDA và cuDNN phù hợp
+3. Thời gian xử lý phụ thuộc vào kích thước ảnh và thiết bị chạy
+4. Để có kết quả tốt nhất, nên sử dụng ảnh có độ phân giải cao
+
+## Yêu cầu hệ thống
+
+- Python 3.8 trở lên
+- CUDA 11.0 trở lên (nếu sử dụng GPU)
+- RAM: ít nhất 8GB
+- Ổ đĩa: ít nhất 10GB trống
+
 <div align="center">
 <h1>Depth Anything V2</h1>
 
